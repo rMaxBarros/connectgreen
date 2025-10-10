@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Serviço da nossa aplicação Python (Flask)
+  webapp:
+    build: .
+    container_name: conecta-verde-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - MONGO_URI=mongodb://mongodb:27017/conectaVerdeDB
+    depends_on:
+      - mongodb
+
+  # Serviço do nosso banco de dados MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
