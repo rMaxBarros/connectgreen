@@ -5,14 +5,27 @@ on:
     branches: [ "main" ]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout do código
       uses: actions/checkout@v3
 
+    - name: Login no Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build e Push da Imagem Docker
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: maxloam/connectgreen:latest
+
     - name: Login no Azure
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
 
@@ -20,7 +33,9 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'connectgreen'
-        images: 'mongo:latest'
+        images: '${{ secrets.DOCKERHUB_USERNAME }}/connectgreen:latest'
 
     - name: Logout do Azure
-      run: az logout
+      if: always()
+      run: |
+        az logout
