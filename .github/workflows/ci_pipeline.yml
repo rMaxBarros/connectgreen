@@ -1,0 +1,27 @@
+name: CI - Pipeline de Integração Contínua
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Subir containers com Docker Compose
+      run: docker-compose up -d --build
+
+    - name: Aguardar o banco de dados
+      run: sleep 15
+
+    - name: Teste de conectividade da API
+      run: |
+        curl -f http://localhost:5000/ || exit 1
+        echo "Teste de API passou!"
+
+    - name: Desligar containers
+      if: always()
+      run: docker-compose down
