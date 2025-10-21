@@ -1,2 +1,6 @@
 flask
 pymongo
+pytest
+pytest-bdd
+requests
+jsonschema

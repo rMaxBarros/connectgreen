@@ -1,0 +1,78 @@
+{
+	"definitions": {},
+	"$schema": "http://json-schema.org/draft-07/schema#", 
+	"$id": "https://example.com/object1761088286.json", 
+	"title": "Root", 
+	"type": "array",
+	"default": [],
+	"items":{
+		"$id": "#root/items", 
+		"title": "Items", 
+		"type": "object",
+		"required": [
+			"data_cadastro",
+			"email",
+			"interesses",
+			"nome",
+			"pontos_engajamento"
+		],
+		"properties": {
+			"data_cadastro": {
+				"$id": "#root/items/data_cadastro", 
+				"title": "Data_cadastro", 
+				"type": "string",
+				"default": "",
+				"examples": [
+					"Fri, 15 Mar 2024 00:00:00 GMT"
+				],
+				"pattern": "^.*$"
+			},
+			"email": {
+				"$id": "#root/items/email", 
+				"title": "Email", 
+				"type": "string",
+				"default": "",
+				"examples": [
+					"ana.silva@email.com"
+				],
+				"pattern": "^.*$"
+			},
+			"interesses": {
+				"$id": "#root/items/interesses", 
+				"title": "Interesses", 
+				"type": "array",
+				"default": [],
+				"items":{
+					"$id": "#root/items/interesses/items", 
+					"title": "Items", 
+					"type": "string",
+					"default": "",
+					"examples": [
+						"horta"
+					],
+					"pattern": "^.*$"
+				}
+			},
+			"nome": {
+				"$id": "#root/items/nome", 
+				"title": "Nome", 
+				"type": "string",
+				"default": "",
+				"examples": [
+					"Ana Silva"
+				],
+				"pattern": "^.*$"
+			},
+			"pontos_engajamento": {
+				"$id": "#root/items/pontos_engajamento", 
+				"title": "Pontos_engajamento", 
+				"type": "integer",
+				"examples": [
+					150
+				],
+				"default": 0
+			}
+		}
+	}
+
+}
