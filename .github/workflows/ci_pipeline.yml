@@ -20,7 +20,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Subir containers com Docker Compose
-      run: docker-compose up -d --build
+      run: docker compose up -d --build
 
     - name: Aguardar serviços iniciarem
       run: sleep 25
@@ -30,4 +30,4 @@ jobs:
 
     - name: Desligar containers
       if: always() 
-      run: docker-compose down
+      run: docker compose down
