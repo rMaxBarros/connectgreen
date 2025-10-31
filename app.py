@@ -12,6 +12,7 @@ db = client.conectaVerdeDB
 def index():
     return "<h1>API ConnectGreen no ar!</h1><p>Acesse /usuarios para ver os dados.</p>"
 
+# Rota para buscar todos os usuários
 @app.route('/usuarios', methods=['GET'])
 def get_usuarios():
     # Acessa a collection de usuários e busca os 10 primeiros
